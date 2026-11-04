@@ -1,8 +1,11 @@
 """Точка входа FastAPI."""
 import os
 from contextlib import asynccontextmanager
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.academics import grades, progress, subjects
 from app.database import models  # noqa: F401  (регистрирует таблицы)
@@ -14,6 +17,9 @@ from app.ai import chat as chat_routes
 from app.scenes import routes as scenes_routes
 from app.ai.text_ai import configure_ai
 from app.seed import seed_demo
+
+# backend/app/main.py -> корень репозитория -> frontend/dist
+DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
 
 
 @asynccontextmanager
@@ -43,3 +49,12 @@ configure_ai()
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
+
+
+# Сайт отдаётся только если фронтенд собран (на компьютере без сборки ничего не меняется)
+if DIST.is_dir():
+    @app.get("/", include_in_schema=False)
+    def root():
+        return RedirectResponse("/cogniva.html")
+
+    app.mount("/", StaticFiles(directory=DIST, html=True), name="site")
