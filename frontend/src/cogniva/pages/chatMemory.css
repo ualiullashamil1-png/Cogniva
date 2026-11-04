@@ -1,0 +1,27 @@
+.chat__tools { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; }
+.chat__memory-toggle { border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: var(--fs-sm); }
+.chat__memory-toggle:hover { filter: brightness(.96); }
+
+.chat__memory {
+  display: grid; gap: var(--space-3); padding: var(--space-4);
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+}
+.chat__memory p { margin: 0; }
+.chat__memory ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.chat__memory li {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding: 8px 12px; border-radius: var(--r-md); background: var(--surface-2); overflow-wrap: anywhere;
+}
+.chat__memory-add { display: flex; gap: var(--space-3); align-items: center; }
+.chat__memory-add .input { flex: 1; }
+
+.chat__proposal {
+  align-self: flex-start; max-width: 92%; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: var(--r-md); background: var(--accent-soft); color: var(--text);
+  border: 1px solid var(--accent); overflow-wrap: anywhere;
+}
+.chat__prop-yes, .chat__prop-no {
+  font: inherit; font-weight: 700; cursor: pointer; padding: 6px 14px; border-radius: var(--r-pill);
+}
+.chat__prop-yes { border: 0; color: #fff; background: var(--gradient); }
+.chat__prop-no { border: 1px solid var(--border-strong); color: var(--text-muted); background: var(--surface); }

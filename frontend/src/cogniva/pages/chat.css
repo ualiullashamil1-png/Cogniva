@@ -1,0 +1,68 @@
+.chat { display: grid; gap: var(--space-4); }
+.chat__head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap; }
+.chat__head h1 { margin: 0 0 4px; }
+.chat__head p { margin: 0; }
+.chat__badge {
+  padding: 4px 12px; border-radius: var(--r-pill); font-size: var(--fs-sm); font-weight: 700;
+  background: var(--accent-soft); color: var(--accent);
+}
+.chat__badge--demo { background: rgba(245, 158, 11, .16); color: #b45309; }
+
+.chat__layout {
+  display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: var(--space-4);
+  height: min(720px, calc(100dvh - 190px)); min-height: 440px;
+}
+.chat__list {
+  display: flex; flex-direction: column; gap: var(--space-3); min-height: 0; padding: var(--space-3);
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+}
+.chat__list ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; overflow-y: auto; }
+.chat__new {
+  font: inherit; font-weight: 700; cursor: pointer; padding: 10px 12px; border-radius: var(--r-md);
+  border: 1px dashed var(--border-strong); background: transparent; color: var(--accent);
+}
+.chat__new:hover:not(:disabled) { background: var(--accent-soft); }
+.chat__item { display: flex; align-items: center; border-radius: var(--r-md); }
+.chat__item.is-active { background: var(--accent-soft); }
+.chat__item-main {
+  flex: 1; min-width: 0; text-align: left; font: inherit; cursor: pointer; background: none; border: 0;
+  padding: 9px 10px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.chat__item-del { font: inherit; font-size: 1.2rem; cursor: pointer; background: none; border: 0; padding: 4px 10px; color: var(--text-faint); }
+.chat__item-del:hover:not(:disabled) { color: var(--danger); }
+.chat__list button:disabled, .chat__chip:disabled { cursor: not-allowed; opacity: .6; }
+
+.chat__panel {
+  display: flex; flex-direction: column; min-height: 0; min-width: 0;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md);
+}
+.chat__messages { flex: 1; min-height: 0; overflow-y: auto; padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); }
+.chat__msg { max-width: 82%; padding: 10px 14px; border-radius: 16px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.5; }
+.chat__msg--user { align-self: flex-end; background: var(--gradient); color: #fff; border-bottom-right-radius: 4px; }
+.chat__msg--assistant { align-self: flex-start; background: var(--surface-2); color: var(--text); border-bottom-left-radius: 4px; }
+.chat__msg--typing { color: var(--text-muted); font-style: italic; }
+.chat__empty { display: grid; gap: var(--space-3); margin: auto; max-width: 520px; text-align: center; }
+.chat__empty p { margin: 0; color: var(--text-muted); }
+.chat__chips { display: grid; gap: 8px; }
+.chat__chip {
+  font: inherit; cursor: pointer; text-align: left; padding: 10px 14px; border-radius: var(--r-md);
+  background: var(--surface); border: 1px solid var(--border-strong); color: var(--text);
+}
+.chat__chip:hover:not(:disabled) { border-color: var(--accent); background: var(--accent-soft); }
+.chat__composer { display: flex; gap: var(--space-3); align-items: flex-end; padding: var(--space-4); border-top: 1px solid var(--border); }
+.chat__input { resize: none; flex: 1; }
+.chat__send {
+  font: inherit; font-weight: 700; cursor: pointer; border: 0; color: #fff; background: var(--gradient);
+  padding: 11px 20px; border-radius: var(--r-md); white-space: nowrap;
+}
+.chat__send:disabled { opacity: .5; cursor: not-allowed; }
+
+@media (max-width: 899px) {
+  .app .app__tabs { grid-template-columns: repeat(4, 1fr); }   /* в меню теперь 4 пункта */
+  .chat__layout { grid-template-columns: 1fr; grid-template-rows: auto minmax(0, 1fr); height: calc(100dvh - 250px); min-height: 420px; }
+  .chat__list { flex-direction: row; align-items: center; overflow-x: auto; padding: var(--space-2); }
+  .chat__list ul { display: flex; overflow: visible; }
+  .chat__item { flex: none; max-width: 200px; }
+  .chat__new { white-space: nowrap; }
+  .chat__msg { max-width: 92%; }
+}
